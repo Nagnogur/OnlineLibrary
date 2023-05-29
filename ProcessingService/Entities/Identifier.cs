@@ -7,6 +7,6 @@ namespace ProcessingService.Entities
         public int IdentifierId { get; set; }
         public string Type { get; set; } = null!;
         public string IdentifierCode { get; set; } = null!;
-        public virtual Book? Books { get; set; }
+        public virtual Book Books { get; set; }
     }
 }

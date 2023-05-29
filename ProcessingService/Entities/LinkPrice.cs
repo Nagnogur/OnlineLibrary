@@ -11,6 +11,6 @@ namespace ProcessingService.Entities
         public double? RetailPrice { get; set; }
         public string? CurrencyRetailPrice { get; set; }
         public string? PortalDomain { get; set; }
-        public virtual Book? Books { get; set; }
+        public virtual Book Books { get; set; }
     }
 }

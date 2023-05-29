@@ -1,6 +1,17 @@
 using ProcessingService;
 using Microsoft.EntityFrameworkCore;
 using ProcessingService.Entities;
+using Azure;
+using FuzzySharp;
+using AutoMapper;
+using System.Runtime.CompilerServices;
+using ProcessingService.Processing;
+using Microsoft.AspNetCore.Mvc;
+using ProcessingService.RetrieveLogic;
+
+///
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +30,11 @@ builder.Services.AddCors(p => p.AddPolicy("DeleteLater", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.IncludeFields = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,32 +48,101 @@ app.UseHttpsRedirection();
 
 app.MapPost("/processing/addbooks", async (List<Book> books, LibraryContext db) =>
 {
+    int res = 0;
+    var bookTitles = db.Books.Select(b => b.Title).ToList();
+    BookProcessing bookProcessing = new BookProcessing();
+
     foreach (var book in books)
     {
-        var possibleDuplicates = db.Books
-        .Include(b => b.Authors)
-        .Where(b => b.Title == book.Title);
-        if (possibleDuplicates.Count() > 0)
+        var extractedMatch = Process.ExtractOne(book.Title, bookTitles, (s) => s);
+        if (extractedMatch == null)
         {
-            /*foreach (var dup in possibleDuplicates)
+            var isSaved = await bookProcessing.SaveBook(db, book);
+            if (isSaved)
             {
-                if (dup.Authors != null && book.Authors != null && !dup.Authors.Select(a => a.Name).Except(book.Authors.Select(a => a.Name)).Any())
-                {
-
-                }
-            }*/
+                res++;
+                bookTitles.Add(book.Title);
+            }
             continue;
         }
-        db.Books.Add(book);
-    }
-    int res;
-    try
-    {
-        res = await db.SaveChangesAsync();
-    }
-    catch (Exception ex)
-    {
-        return Results.BadRequest(ex);
+        
+        if (extractedMatch.Score >= 90)
+        {
+            Book? extractedBook = await db.Books
+            .Include(b => b.Authors)
+            .Include(b => b.Origin)
+            .FirstOrDefaultAsync(b => b.Title == extractedMatch.Value);
+
+            if (extractedBook == null)
+            {
+                continue;
+            }
+
+            var bookLink = book.Origin.FirstOrDefault();
+            if (extractedBook.Origin.Where(o => o.Link == bookLink?.Link).Any())
+            {
+                ///  set missing parameters
+                continue;
+            }
+            else if (bookLink != null)
+            {
+                extractedBook.Origin.Add(bookLink);
+            }
+
+            if (extractedBook.Authors == null || book.Authors == null)
+            {
+                /// set new book
+                try
+                {
+                    db.Books.Update(extractedBook);
+                    await db.SaveChangesAsync();
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
+            }
+
+            foreach (var author in book.Authors)
+            {
+                var extractedAuthorMatch = Process.ExtractOne(author.Name, extractedBook.Authors.Select(a => a.Name), (s) => s);
+                
+                if (extractedAuthorMatch.Score < 90)
+                {
+                    /// 
+                    var isSaved = await bookProcessing.SaveBook(db, book);
+                    if (isSaved)
+                    {
+                        res++;
+                        bookTitles.Add(book.Title);
+                    }
+                    continue;
+                }
+                else
+                {
+                    try
+                    {
+                        db.Books.Update(extractedBook);
+                        await db.SaveChangesAsync();
+                        continue;
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+        else
+        {
+            var isSaved = await bookProcessing.SaveBook(db, book);
+            if (isSaved)
+            {
+                res++;
+                bookTitles.Add(book.Title);
+            }
+        }
     }
     
     if (res > 0)
@@ -84,6 +169,16 @@ app.MapGet("/processing/getbooks", async (LibraryContext db) =>
     return books;
 })
 .WithName("BooksController");
+
+/*app.MapGet("/api/books", async (LibraryContext db, [FromQuery]BookQueryParameters bookParameters) =>
+{
+    BookManipulationService bookManipulationService = new BookManipulationService(db);
+    var res = await bookManipulationService.GetBooksWithParameters(bookParameters);
+    
+    return Results.Ok(res);
+})
+.WithName("BooksWithPaging");*/
+
 
 app.UseCors("DeleteLater");
 

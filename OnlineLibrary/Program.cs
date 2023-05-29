@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using OnlineLibrary.ApiParsers;
 using OnlineLibrary.Models;
+using ParsingService.Models;
 using ParsingService.Orchestration.SearchService;
 using ParsingService.RegisteredPages.Royalroad;
 using System;
@@ -70,6 +71,20 @@ app.MapPost("/scraproyalroad", async (HttpClient client) =>
     return Results.Ok(response);
 })
 .WithName("ScrapPage");
+
+app.MapPost("/testModel", () =>
+{
+    QueryModel queryModel = new QueryModel();
+    queryModel.url = "sda";
+    queryModel.staticQueryParameters = new Dictionary<string, string>() { {"dsKey", "dsVal" }, { "k2", "v2" } };
+    queryModel.changingValueParameters = new List<(string, string)>() { ("k1", "v1"), ("k2", "v2") };
+
+    var jsonBody = JsonConvert.SerializeObject(queryModel);
+    var body = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+    return Results.Ok(jsonBody);
+
+})
+.WithName("TestModel");
 
 app.Run();
 
