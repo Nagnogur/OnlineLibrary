@@ -117,10 +117,15 @@ namespace OrchestrationService.RegisteredServices
 
             foreach ( var bookContainer in bookContainers )
             {
-                var title = bookContainer.SelectSingleNode(".//h2[(contains(@class, 'fiction-title'))]/a").InnerText;
+                string title = WebUtility.HtmlDecode(bookContainer.SelectSingleNode(".//h2[(contains(@class, 'fiction-title'))]/a").InnerText);
                 //var title = fictionTitleRow.InnerText;
                 var link = bookContainer.SelectSingleNode(".//figure/a").Attributes["href"].Value;
                 link = baseUrl + link;
+
+                if (title != null && title.Contains("sinner")) 
+                { 
+
+                }
 
                 var thumbnailLink = bookContainer.SelectSingleNode(".//figure/a/img").Attributes["src"].Value;
                 var stats = bookContainer.SelectSingleNode(".//div[(contains(@class, 'stats'))]");
@@ -138,7 +143,7 @@ namespace OrchestrationService.RegisteredServices
                 long.TryParse(publishTimeUnixtimeString, out publishTimeUnixtime);
 
 
-                var description = stats.SelectSingleNode("./div[(contains(@id, \'description\'))]").InnerText.Trim();
+                var description = WebUtility.HtmlDecode(stats.SelectSingleNode("./div[(contains(@id, \'description\'))]").InnerText.Trim());
 
                 int ratingCount = -1;
 
@@ -151,7 +156,7 @@ namespace OrchestrationService.RegisteredServices
                     HtmlDocument detailsHtmlDoc = new HtmlDocument();
                     detailsHtmlDoc.LoadHtml(detailsHtml);
 
-                    author = detailsHtmlDoc.DocumentNode.SelectSingleNode(".//div[(contains(@class, 'fic-header'))]//span[./a]/a").InnerText;
+                    author = WebUtility.HtmlDecode(detailsHtmlDoc.DocumentNode.SelectSingleNode(".//div[(contains(@class, 'fic-header'))]//span[./a]/a").InnerText);
                     int.TryParse(detailsHtmlDoc.DocumentNode.SelectSingleNode("//li[.='Ratings :']/following-sibling::li").InnerText, NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out ratingCount);
                     
                 }

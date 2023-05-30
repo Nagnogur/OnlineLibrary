@@ -30,10 +30,10 @@ builder.Services.AddCors(p => p.AddPolicy("DeleteLater", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
-builder.Services.Configure<JsonOptions>(options =>
+/*builder.Services.Configure<JsonOptions>(options =>
 {
     options.JsonSerializerOptions.IncludeFields = true;
-});
+});*/
 
 var app = builder.Build();
 

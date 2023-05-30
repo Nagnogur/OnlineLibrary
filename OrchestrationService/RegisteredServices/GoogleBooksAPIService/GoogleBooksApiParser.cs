@@ -31,6 +31,7 @@ namespace OrchestrationService.RegisteredServices.GoogleBooksAPIService
         {
             fiction,
             historical,
+            art
         }
         public QueryModel GetQueryModel()
         {

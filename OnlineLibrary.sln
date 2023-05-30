@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchestrationService", "Orc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProcessingServer", "DataProcessingServer\DataProcessingServer.csproj", "{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
