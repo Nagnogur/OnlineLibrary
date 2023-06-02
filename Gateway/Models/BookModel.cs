@@ -11,6 +11,7 @@ namespace Gateway.Models
             IndustryIdentifiers = new HashSet<IdentifierModel>();
             Origin = new HashSet<LinkModel>();
         }
+        public int BookId { get; set; }
         public string Title { get; set; } = null!;
         public string? Subtitle { get; set; }
         public string? Publisher { get; set; }

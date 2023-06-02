@@ -18,9 +18,13 @@ namespace ProcessingService.RetrieveLogic
         public string? Domain { get; set; }
         public string? Author { get; set; }
         public DateTime? MinPublishDate { get; set; }
-        public DateTime? MaxPublishDate { get; set; } = DateTime.Now;
+        public DateTime? MaxPublishDate { get; set; }
         public DateTime? MinRetrievedDate { get; set; }
-        public DateTime? MaxRetrievedDate { get; set; } = DateTime.Now;
+        public DateTime? MaxRetrievedDate { get; set; }
+        public bool? WithSeveralLinks { get; set; }
+        public bool? WithDiscount { get; set; }
+        public int PageNumber { get; set; } = 1;
+        //private int ageSize = 10;
     }
 }
        

@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsingService", "OnlineLibrary\ParsingService.csproj", "{7CF3C935-2D4D-4F76-BD6B-7323BAA0F665}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessingService", "ProcessingService\ProcessingService.csproj", "{1A989481-083B-4A5C-A5E7-FD9045143C48}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchestrationService", "OrchestrationService\OrchestrationService.csproj", "{298054ED-BD5B-4ED0-B58A-76994C175C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProcessingServer", "DataProcessingServer\DataProcessingServer.csproj", "{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataProcessingServer", "DataProcessingServer\DataProcessingServer.csproj", "{4FAFABC2-78F3-4B43-90D5-1F321B2598CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Gateway\Gateway.csproj", "{C6BD0BC2-466B-498D-86E3-43AC45D9B7D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7CF3C935-2D4D-4F76-BD6B-7323BAA0F665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CF3C935-2D4D-4F76-BD6B-7323BAA0F665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CF3C935-2D4D-4F76-BD6B-7323BAA0F665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CF3C935-2D4D-4F76-BD6B-7323BAA0F665}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A989481-083B-4A5C-A5E7-FD9045143C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A989481-083B-4A5C-A5E7-FD9045143C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A989481-083B-4A5C-A5E7-FD9045143C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A989481-083B-4A5C-A5E7-FD9045143C48}.Release|Any CPU.Build.0 = Release|Any CPU
 		{298054ED-BD5B-4ED0-B58A-76994C175C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{298054ED-BD5B-4ED0-B58A-76994C175C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{298054ED-BD5B-4ED0-B58A-76994C175C16}.Release|Any CPU.ActiveCfg = Release|Any CPU

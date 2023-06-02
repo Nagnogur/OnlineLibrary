@@ -12,7 +12,7 @@ namespace ProcessingService.Processing
         {
             Book newBook = new Book();
 
-            if (book.Origin == null || book.Origin.Where(o => o.Link == null).Any()) 
+            if (book.Origin == null || book.Origin.Where(o => o.Link == null).Any())
             {
                 return false;
             }
@@ -179,7 +179,7 @@ namespace ProcessingService.Processing
                 return false;*/
                 db.Books.Update(bookToUpdate);
                 db.SaveChangesAsync();
-                
+
                 return true;
             }
             catch
@@ -188,92 +188,62 @@ namespace ProcessingService.Processing
             }
         }
 
-        /// <returns>  false if book does not exist </returns>
-        /*public async Task<bool> Exist(LibraryContext db, Book book, List<string> bookTitles)
+        public async Task<bool> UpdateBookWithoutChecks(LibraryContext db, Book newBook, Book bookToUpdate, string? newTitle = null)
         {
-            var extractedMatch = Process.ExtractOne(book.Title, bookTitles, (s) => s);
-            if (extractedMatch == null)
+            if (newTitle != null)
+            {
+                bookToUpdate.Title = newTitle;
+            }
+
+            db.Books.ExecuteUpdate(s => s
+                .SetProperty(e => e.TimeUpdated, e => DateTime.Now));
+
+            bookToUpdate.Subtitle = newBook.Subtitle;
+            bookToUpdate.AverageRating = newBook.AverageRating;
+            bookToUpdate.Description = newBook.Description;
+            bookToUpdate.Language = newBook.Language;
+            bookToUpdate.MaturityRating = newBook.MaturityRating;
+            bookToUpdate.PageCount = newBook.PageCount;
+            bookToUpdate.PublishedDate = newBook.PublishedDate;
+            bookToUpdate.Publisher = newBook.Publisher;
+            bookToUpdate.RatingCount = newBook.RatingCount;
+            bookToUpdate.ThumbnailFile = newBook.ThumbnailFile;
+            bookToUpdate.ThumbnailLink = newBook.ThumbnailLink;
+            bookToUpdate.Authors = newBook.Authors;
+            bookToUpdate.Categories = newBook.Categories;
+            bookToUpdate.IndustryIdentifiers = newBook.IndustryIdentifiers;
+            bookToUpdate.Origin = newBook.Origin;
+
+            try
+            {
+                db.Books.Update(bookToUpdate);
+                var res = await db.SaveChangesAsync();
+                return res > 0;
+            }
+            catch
             {
                 return false;
             }
+        }
 
-            if (extractedMatch.Score >= 90)
+        public async Task<bool> DeleteBook(LibraryContext db, string title)
+        {
+            var bookToDelete = await db.Books.FirstOrDefaultAsync(b => b.Title == title);
+
+            if (bookToDelete != null)
             {
-                Book? extractedBook = await db.Books
-                .Include(b => b.Authors)
-                .Include(b => b.Origin)
-                .FirstOrDefaultAsync(b => b.Title == extractedMatch.Value);
-
-                if (extractedBook == null)
+                db.Books.Remove(bookToDelete);
+                try
                 {
-                    return true;
+                    var res = await db.SaveChangesAsync();
+                    return res > 0;
                 }
-
-                var bookLink = book.Origin.FirstOrDefault();
-                if (extractedBook.Origin.Where(o => o.Link == bookLink?.Link).Any())
+                catch
                 {
-                    ///  set missing parameters
                     return false;
                 }
-                else if (bookLink != null)
-                {
-                    extractedBook.Origin.Add(bookLink);
-                }
-
-                if (extractedBook.Authors == null || book.Authors == null)
-                {
-                    /// set new book
-                    try
-                    {
-                        db.Books.Update(extractedBook);
-                        await db.SaveChangesAsync();
-                        continue;
-                    }
-                    catch (Exception ex)
-                    {
-                        continue;
-                    }
-                }
-
-                foreach (var author in book.Authors)
-                {
-                    var extractedAuthorMatch = Process.ExtractOne(author.Name, extractedBook.Authors.Select(a => a.Name), (s) => s);
-
-                    if (extractedAuthorMatch.Score < 90)
-                    {
-                        /// 
-                        var isSaved = await bookProcessing.SaveBook(db, book);
-                        if (isSaved)
-                        {
-                            res++;
-                            bookTitles.Add(book.Title);
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            db.Books.Update(extractedBook);
-                            await db.SaveChangesAsync();
-                            continue;
-                        }
-                        catch (Exception ex)
-                        {
-                            continue;
-                        }
-                    }
-                }
             }
-            else
-            {
-                var isSaved = await bookProcessing.SaveBook(db, book);
-                if (isSaved)
-                {
-                    res++;
-                    bookTitles.Add(book.Title);
-                }
-            }
-        }*/
+            return false;
+        }
     }
 }

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataProcessingServer.Controllers.BookController">
+    <Position X="10" Y="6" Width="2" />
+    <InheritanceLine Type="Microsoft.AspNetCore.Mvc.ControllerBase" FixedToPoint="true">
+      <Path>
+        <Point X="11" Y="9.75" />
+        <Point X="11" Y="8.838" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>BAAAAgAAAAAQAAAABAAAAAAAAAEAAAAAIAAAAAAAQAA=</HashCode>
+      <FileName>Controllers\BookController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Entities.Author">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Entities\Author.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Entities.Book">
+    <Position X="12.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIACAAACAAgAkAASEAEACAAAABCEAAAAiAAAQgAAAA=</HashCode>
+      <FileName>Entities\Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Entities.Category">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAgCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Entities.Identifier">
+    <Position X="22.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAgAAAAAAgAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Identifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Entities.LinkPrice">
+    <Position X="15" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAAAIAAAAAAAgAAAAgAAAAAAAIACAQAAAAAA=</HashCode>
+      <FileName>Entities\LinkPrice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.Processing.BookProcessing">
+    <Position X="7" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAAAAAAAAACAAAAAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Processing\BookProcessing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.RetrieveLogic.BookManipulationService">
+    <Position X="19.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QgAAAgAAAEIQQAAQggAEAAAAAAAABIghAAoAAQAIAAA=</HashCode>
+      <FileName>RetrieveLogic\BookManipulationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.RetrieveLogic.BookQueryParameters">
+    <Position X="5" Y="6.25" Width="1.75" />
+    <InheritanceLine Type="ProcessingService.RetrieveLogic.QueryParameters" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="5.44" />
+        <Point X="5.75" Y="6.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>BAAAACAAEQAAAEIAiAAAAAAgIggAAQAAAAAABAQAQCA=</HashCode>
+      <FileName>RetrieveLogic\BookQueryParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.RetrieveLogic.QueryParameters">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABA=</HashCode>
+      <FileName>RetrieveLogic\QueryParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.LibraryContext">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <InheritanceLine Type="Microsoft.EntityFrameworkCore.DbContext" FixedFromPoint="true">
+      <Path>
+        <Point X="8.25" Y="9.5" />
+        <Point X="8.25" Y="8.454" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAgABAEAAAAAAAAAIAAAA=</HashCode>
+      <FileName>LibraryContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="13.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.ControllerBase" Collapsed="true">
+    <Position X="10.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.EntityFrameworkCore.DbContext" Collapsed="true">
+    <Position X="7.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

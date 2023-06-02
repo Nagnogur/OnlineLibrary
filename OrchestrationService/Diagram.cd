@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ParsingService.Models.Entities.Author">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Author.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingService.Models.Entities.BookModel">
+    <Position X="13" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAQAAIAAwAIgIAAUhQAAAgAAAAQAAAAAACAAA=</HashCode>
+      <FileName>Models\Entities\BookModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingService.Models.Entities.Category">
+    <Position X="23.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingService.Models.Entities.Identifier">
+    <Position X="10.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Identifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingService.Models.Entities.LinkWithPrice">
+    <Position X="15.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAgAAAAAKAAAAAAAAAAAAAAAAAAAAACAAEA=</HashCode>
+      <FileName>Models\Entities\LinkWithPrice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParsingService.Models.QueryModel">
+    <Position X="18" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAACAAAAEAAQAAIAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\QueryModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrchestrationService.RegisteredServices.GoogleBooksAPIService.GoogleBooksApiParser">
+    <Position X="5.75" Y="4" Width="2" />
+    <NestedTypes>
+      <Enum Name="OrchestrationService.RegisteredServices.GoogleBooksAPIService.GoogleBooksApiParser.SubjectEnum" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RegisteredServices\GoogleBooksAPIService\GoogleBooksApiParser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAABAAAAAAAAAAAAAAAAAAAAAACAAAAAABAAAAAA=</HashCode>
+      <FileName>RegisteredServices\GoogleBooksAPIService\GoogleBooksApiParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.377" />
+  </Class>
+  <Class Name="OrchestrationService.RegisteredServices.RoyalRoadScrapper">
+    <Position X="3.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAABAAAAAAAAAAAAAAAAAAAAIAAAAIAAAIAAAAAA=</HashCode>
+      <FileName>RegisteredServices\RoyalRoadService\RoyalRoadScrapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.597" />
+  </Class>
+  <Class Name="OrchestrationService.Services.ApiParser">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ApiParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrchestrationService.Services.PeriodicScanService">
+    <Position X="8.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAEAAAAAIAAAAAAAAAAAAAAAAEI=</HashCode>
+      <FileName>Services\PeriodicScanService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrchestrationService.Services.WebParser">
+    <Position X="3.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAIAAAACAAAAA=</HashCode>
+      <FileName>Services\WebParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrchestrationService.Orchestrator" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAACAAAIAAAAAgAAAAIBAAAAAA=</HashCode>
+      <FileName>Orchestrator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.334" />
+  </Class>
+  <Class Name="OrchestrationService.ScanService">
+    <Position X="21" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQACAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Orchestrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.Extensions.Hosting.BackgroundService" Collapsed="true">
+    <Position X="8.5" Y="7" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="OrchestrationService.Services.ISearchService">
+    <Position X="4.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ISearchService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OrchestrationService.IOrchestratorService">
+    <Position X="25.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAA=</HashCode>
+      <FileName>Orchestrator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OrchestrationService.ServiceEnum" Collapsed="true">
+    <Position X="16" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Orchestrator.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

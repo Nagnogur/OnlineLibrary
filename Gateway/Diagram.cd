@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gateway.Controllers.AdminController">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Gateway.Controllers.AdminController.RegistrationModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AdminController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Gateway.Controllers.AdminController.LoginModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AdminController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABQAAAAAAAAAAAABAAAAgAAAAIQAAAAEQAAAAAAA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Controllers.ApiController">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAABAAAAAAAAAAACAAAAAAAgABAAAAAA=</HashCode>
+      <FileName>Controllers\ApiController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Controllers.ManagementController">
+    <Position X="13.25" Y="5.5" Width="2" />
+    <NestedTypes>
+      <Enum Name="Gateway.Controllers.ManagementController.ServiceEnum" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\ManagementController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAIAIAAAAAiAAAAEACAEAAAAAAAgABAAAQAA=</HashCode>
+      <FileName>Controllers\ManagementController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Entities.Author">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Entities\Author.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Entities.Book">
+    <Position X="17.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIACAAACAAgAkAASEAEACAAAABCEAAAAiAAAQgAAAA=</HashCode>
+      <FileName>Entities\Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Entities.Category">
+    <Position X="29" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAgCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Entities.Identifier">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAgAAAAAAgAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Identifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Entities.LinkPrice">
+    <Position X="20" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAAAIAAAAAAAgAAAAgAAAAAAAIACAQAAAAAA=</HashCode>
+      <FileName>Entities\LinkPrice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessingService.RetrieveLogic.BookQueryParameters">
+    <Position X="27" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BACAACAAEQAAAEIAiAAAAAAgIggAAQAAAAAABAQAQCA=</HashCode>
+      <FileName>Entities\BookQueryParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Extensions.ExtensionMethods">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Mapper.MapperProfile">
+    <Position X="25.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapper\MapperProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Models.AuthorModel">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <InheritanceLine Type="System.Object" ManuallyRouted="true">
+      <Path>
+        <Point X="16.75" Y="7.75" />
+        <Point X="16.75" Y="4.339" />
+        <Point X="11.333" Y="4.339" Type="JumpStart" />
+        <Point X="11.167" Y="4.339" Type="JumpEnd" />
+        <Point X="9" Y="4.339" />
+        <Point X="9" Y="2.853" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AuthorModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Models.BookModel">
+    <Position X="24.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIACAAACAAgAEAASEAEACAAAABAEAAAAiAAAQgAAAA=</HashCode>
+      <FileName>Models\BookModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Models.CategoryModel">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CategoryModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Models.IdentifierModel">
+    <Position X="22.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentifierModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gateway.Models.LinkModel">
+    <Position X="12.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAAAIAAAAAAAgAAAAAAAAAAAAIAAAQAAAAAA=</HashCode>
+      <FileName>Models\LinkModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.ControllerBase" Collapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="16" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

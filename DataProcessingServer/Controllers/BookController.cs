@@ -72,8 +72,11 @@ namespace DataProcessingServer.Controllers
 
                 }*/
 
-                bookTitles.Add(book.Title);
+                
                 var extractedMatch = Process.ExtractOne(book.Title, bookTitles, (s) => s);
+
+                bookTitles.Add(book.Title);
+
                 if (extractedMatch == null)
                 {
                     var isSaved = await bookProcessing.SaveBook(db, book);
@@ -154,6 +157,63 @@ namespace DataProcessingServer.Controllers
             }
 
             return Ok(res);
+        }
+
+        [HttpPost]
+        [Route("forceaddbook")]
+        public async Task<IActionResult> ForceAdd(Book book)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var isSaved = await bookProcessing.SaveBook(db, book);
+            if (isSaved)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("deleteBook")]
+        public async Task<IActionResult> Delete(string title)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var deleted = await bookProcessing.DeleteBook(db, title);
+            if (deleted)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("forceupdate")]
+        public async Task<IActionResult> ForceUpdate(Book book, string? title = null)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var bookToUpdate = await db.Books
+                .Where(b => b.Title == book.Title)
+                .Include(b => b.Authors)
+                .Include(b => b.Origin)
+                .Include(b => b.IndustryIdentifiers)
+                .FirstOrDefaultAsync();
+
+            if (bookToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            var updated = await bookProcessing.UpdateBookWithoutChecks(db, book, bookToUpdate, title);
+            if (updated)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
 
     }
