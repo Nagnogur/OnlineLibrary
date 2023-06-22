@@ -10,6 +10,7 @@ namespace Gateway.Entities
             Categories = new HashSet<Category>();
             IndustryIdentifiers = new HashSet<Identifier>();
             Origin = new HashSet<LinkPrice>();
+            Reviews = new HashSet<Review>();
         }
         public int BookId { get; set; }
         public string Title { get; set; } = null!;
@@ -31,7 +32,9 @@ namespace Gateway.Entities
         public virtual ICollection<Identifier> IndustryIdentifiers { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<LinkPrice> Origin { get; set; }
-
+        public virtual ICollection<Review> Reviews { get; set; }
+        public string? FileLocation { get; set; }
+        public string? UserId { get; set; }
 
     }
 }

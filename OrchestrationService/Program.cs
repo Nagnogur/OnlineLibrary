@@ -74,8 +74,15 @@ app.MapMethods("/scanservicetoggle", new[] { "PATCH" }, (
 
 app.MapPost("/setscantimer", (double minutes, PeriodicScanService scanService) =>
 {
-    scanService.Period = TimeSpan.FromMinutes(minutes);
-    return scanService.Period;
+    try
+    {
+        scanService.Period = TimeSpan.FromMinutes(minutes);
+        return scanService.Period;
+    }
+    catch
+    {
+        return scanService.Period;
+    }
 });
 
 app.Run();

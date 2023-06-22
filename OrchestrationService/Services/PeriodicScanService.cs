@@ -3,7 +3,7 @@
     record PeriodicScanServiceState(bool IsEnabled);
     public class PeriodicScanService : BackgroundService
     {
-        public bool IsEnabled { get; set; } = true;
+        public bool IsEnabled { get; set; } = false;
         /// TODO
         public TimeSpan Period = TimeSpan.FromMinutes(10);
         private readonly IServiceScopeFactory serviceScopeFactory;

@@ -12,6 +12,7 @@ namespace Gateway.Mapper
             CreateMap<Identifier, IdentifierModel>().ReverseMap();
             CreateMap<Author, AuthorModel>().ReverseMap();
             CreateMap<LinkPrice, LinkModel>().ReverseMap();
+            CreateMap<Review, ReviewModel>().ReverseMap();
             CreateMap<Book, BookModel>().ReverseMap();
             // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)
         }

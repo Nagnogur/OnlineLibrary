@@ -80,7 +80,7 @@ namespace OrchestrationService
         }
         public async Task InvokeServices()
         {
-            foreach (int service in Enum.GetValues(typeof(ConsoleColor)))
+            foreach (int service in Enum.GetValues(typeof(ServiceEnum)))//ConsoleColor)))
             {
                 var res = await orchestrator.SaveToDatabase(service);
                 if (res == Results.Ok())

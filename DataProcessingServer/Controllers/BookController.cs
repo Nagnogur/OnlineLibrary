@@ -6,6 +6,7 @@ using ProcessingService;
 using ProcessingService.Entities;
 using ProcessingService.Processing;
 using ProcessingService.RetrieveLogic;
+using System.Security.Claims;
 
 namespace DataProcessingServer.Controllers
 {
@@ -27,6 +28,27 @@ namespace DataProcessingServer.Controllers
 
             return res;
         }
+
+        [Route("books/{id}")]
+        // GET: books/5
+        public async Task<Book?> GetBookById(int id)
+        {
+            BookManipulationService bookManipulationService = new BookManipulationService(db);
+            var res = await bookManipulationService.GetBookById(id);
+
+            return res;
+        }
+
+        [Route("books/user/{id}")]
+        // GET: books/5
+        public async Task<IEnumerable<Book>> GetBookByUserId(string id)
+        {
+            BookManipulationService bookManipulationService = new BookManipulationService(db);
+            var res = await bookManipulationService.GetBookByUserId(id);
+
+            return res;
+        }
+
 
         [HttpPut]
         [Route("updatebook")]
@@ -173,14 +195,62 @@ namespace DataProcessingServer.Controllers
 
             return BadRequest();
         }
+        
+        [HttpPost]
+        [Route("saveuserbook")]
+        public async Task<IActionResult> SaveUserBook(Book book)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var isSaved = await bookProcessing.SaveUserBook(db, book);
+            if (isSaved)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [Route("edituserbook/{bookId}")]
+        public async Task<IActionResult> EditUserBook(Book book)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var res = await bookProcessing.EditUserBook(db, book);
+
+            if (res)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpDelete]
-        [Route("deleteBook")]
+        [Route("deleteByTitle")]
         public async Task<IActionResult> Delete(string title)
         {
             BookProcessing bookProcessing = new BookProcessing();
 
             var deleted = await bookProcessing.DeleteBook(db, title);
+            if (deleted)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<IActionResult> Delete(int bookId, string userId)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var deleted = await bookProcessing.DeleteBook(db, bookId, userId);
             if (deleted)
             {
                 return Ok();
@@ -216,5 +286,52 @@ namespace DataProcessingServer.Controllers
             return BadRequest();
         }
 
+        [HttpPost]
+        [Route("ratebook")]
+        public async Task<IActionResult> RateBook(Review review)
+        {
+            BookProcessing bookProcessing = new BookProcessing();
+
+            var isSaved = await bookProcessing.RateBook(db, review);
+            if (isSaved)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+
+        [HttpGet]
+        [Route("ratings")]
+        public async Task<IEnumerable<Review>> GetRatings()
+        {
+            List<Review> res = null;
+            try
+            {
+                res = await db.Reviews.AsNoTracking()
+                    .Include(r => r.Book).ThenInclude(b => b.Categories).AsNoTracking()
+                    .Include(r => r.Book).ThenInclude(b => b.Origin).AsNoTracking()
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return res;
+        }
+
+        [HttpGet]
+        [Route("unratedbooks")]
+        public async Task<IEnumerable<Book>> GetUnratedBooks(string userId)
+        {
+            var books = await db.Books.AsNoTracking()
+                .Include(b => b.Categories).AsNoTracking()
+                .Include(b => b.Reviews).AsNoTracking()
+                .Where(b => !b.Reviews.Where(r => r.UserId == userId).Any())
+                .ToListAsync();
+
+            return books;
+        }
     }
 }

@@ -11,12 +11,38 @@ namespace ProcessingService.RetrieveLogic
     {
         private LibraryContext db;
 
-        private int cutoff = 80;
+        private int cutoff = 85;
         //private int limit = 20;
         
         public BookManipulationService(LibraryContext db)
         {
             this.db = db;
+        }
+
+        public async Task<Book?> GetBookById(int id)
+        {
+            var book = await this.db.Books
+                .Include(b => b.Authors)
+                .Include(b => b.Categories)
+                .Include(b => b.IndustryIdentifiers)
+                .Include(b => b.Origin)
+                .Include(b => b.Reviews)
+                .FirstOrDefaultAsync(b => b.BookId == id);
+            
+            return book;
+        }
+        public async Task<IEnumerable<Book>> GetBookByUserId(string id)
+        {
+            var books = await this.db.Books
+                .Include(b => b.Authors)
+                .Include(b => b.Categories)
+                .Include(b => b.IndustryIdentifiers)
+                .Include(b => b.Origin)
+                .Include(b => b.Reviews)
+                .Where(b => b.UserId == id)
+                .ToListAsync();
+
+            return books;
         }
         public async Task<IEnumerable<Book>> GetBooksWithParameters(BookQueryParameters parameters)
         {
@@ -26,7 +52,9 @@ namespace ProcessingService.RetrieveLogic
                 .Include(b => b.Authors)
                 .Include(b => b.Categories)
                 .Include(b => b.IndustryIdentifiers)
-                .Include(b => b.Origin);
+                .Include(b => b.Origin)
+                .Include(b => b.Reviews);
+
 
             if (parameters.Publisher != null)
             {
@@ -92,7 +120,7 @@ namespace ProcessingService.RetrieveLogic
                 books = FilterByMaxRetrieveDate(books, parameters.MaxRetrievedDate.Value);
             }
 
-            if (parameters.WithSeveralLinks != null)
+            if (parameters.WithSeveralLinks != null && parameters.WithSeveralLinks == true)
             {
                 books = FilterByLinkCount(books, parameters.WithSeveralLinks.Value);
             }
@@ -129,13 +157,12 @@ namespace ProcessingService.RetrieveLogic
         public IQueryable<Book> FilterByTitle(IQueryable<Book> books, string userTitle)
         {
             var bookTitles = books.Select(b => b.Title).ToList();
-            var extractedMatches = Process.ExtractAll(userTitle, bookTitles, cutoff: cutoff, scorer: ScorerCache.Get<PartialTokenSetScorer>());//, limit: limit);
+            var extractedMatches = Process.ExtractAll(userTitle, bookTitles, cutoff: cutoff, scorer: ScorerCache.Get<TokenSortScorer>());//, limit: limit);
 
             if (extractedMatches == null)
             {
                 return Enumerable.Empty<Book>().AsQueryable();
             }
-
             IQueryable<Book> query = books.Where(b => b.Title.Contains(userTitle) 
                 || extractedMatches.Select(em => em.Value).Contains(b.Title));
 
@@ -163,6 +190,16 @@ namespace ProcessingService.RetrieveLogic
 
         public IQueryable<Book> FilterByRating(IQueryable<Book> books, float? minRating = 0, float? maxRating = 10)
         {
+            if (minRating == null)
+            {
+                minRating = 0;
+            }
+
+            if (maxRating == null)
+            {
+                maxRating = 5;
+            }
+
             IQueryable<Book> query = books.Where(b => b.AverageRating != null 
             && b.AverageRating >= minRating && b.AverageRating <= maxRating);
 

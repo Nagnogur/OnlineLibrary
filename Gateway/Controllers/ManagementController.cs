@@ -172,7 +172,7 @@ namespace Gateway.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(string title)
         {
-            string processingServerUrl = "https://localhost:7248/api/deleteBook";
+            string processingServerUrl = "https://localhost:7248/api/deleteByTitle";
 
             processingServerUrl = QueryHelpers.AddQueryString(processingServerUrl, "title", title);
 
@@ -184,6 +184,26 @@ namespace Gateway.Controllers
             else
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpGet("retrain")]
+        public async Task<IActionResult> RetrainModel()
+        {
+            var url = "https://localhost:7248/api/ratings";
+
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var res = JsonConvert.DeserializeObject<List<Review>>(await response.Content.ReadAsStringAsync());
+
+                var recommenderUrl = "https://localhost:7275/recommender";
+                var recommednations = await client.PostAsync(recommenderUrl, response.Content);
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest(response.StatusCode);
             }
         }
     }

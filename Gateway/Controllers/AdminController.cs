@@ -15,7 +15,7 @@ namespace Gateway.Controllers
 {
     [Route("user")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -54,6 +54,7 @@ namespace Gateway.Controllers
         // GET: api/<AdminController>
         [HttpPost]
         [Route("registeradmin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegistrationModel model)
         {
             var userExists = await _userManager.FindByNameAsync(model.Email);
@@ -87,6 +88,38 @@ namespace Gateway.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register([FromBody] RegistrationModel model)
+        {
+            var userExists = await _userManager.FindByNameAsync(model.Email);
+            if (userExists != null)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            IdentityUser user = new()
+            {
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.Email
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            if (!await _roleManager.RoleExistsAsync("User"))
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+
+            if (await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+            return Ok();
+        }
+
+
+        [HttpPost]
         [Route("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -99,7 +132,8 @@ namespace Gateway.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, user.Id),
+                    /*new Claim(ClaimTypes., Guid.NewGuid().ToString()),*/
                 };
 
                 foreach (var userRole in userRoles)
